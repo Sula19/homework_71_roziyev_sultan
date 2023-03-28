@@ -1,0 +1,68 @@
+[
+{
+   "model": "instagram.post",
+   "pk": 28,
+   "fields": {
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid blanditiis, deserunt distinctio doloremque dolores doloribus excepturi ipsa labore sapiente sequi tempora, velit. Asperiores aspernatur atque cum dolorem earum eos exercitationem molestiae nihil. Aliquid at enim facere, impedit ipsam laudantium magni natus odio officiis optio quaerat quibusdam. Alias culpa magnam reiciendis?",
+      "image": "posts/9r4rx0eqtkx21_nUV0Ozy.png",
+      "author": 9,
+      "created": "2023-03-26T07:03:43.591Z",
+      "updated": "2023-03-27T07:03:50.542Z"
+   }
+},
+{
+   "model": "instagram.post",
+   "pk": 35,
+   "fields": {
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid blanditiis, deserunt distinctio doloremque dolores doloribus excepturi ipsa labore sapiente sequi tempora, velit. Asperiores aspernatur atque cum dolorem earum eos exercitationem molestiae nihil. Aliquid at enim facere, impedit ipsam laudantium magni natus odio officiis optio quaerat quibusdam. Alias culpa magnam reiciendis?",
+      "image": "posts/31_OG3Ew0s.jpg",
+      "author": 7,
+      "created": "2023-03-28T05:58:54.781Z",
+      "updated": "2023-03-28T05:58:54.781Z"
+   }
+},
+{
+   "model": "instagram.post",
+   "pk": 36,
+   "fields": {
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid blanditiis, deserunt distinctio doloremque dolores doloribus excepturi ipsa labore sapiente sequi tempora, velit. Asperiores aspernatur atque cum dolorem earum eos exercitationem molestiae nihil. Aliquid at enim facere, impedit ipsam laudantium magni natus odio officiis optio quaerat quibusdam. Alias culpa magnam reiciendis?",
+      "image": "posts/167947-legkovyye_avtomobili-sportkar-delorian-dms_delorian-komplektacii_avtomobily_KFjOOOR.jpg",
+      "author": 8,
+      "created": "2023-03-28T10:01:05.500Z",
+      "updated": "2023-03-28T10:01:05.500Z"
+   }
+},
+{
+   "model": "instagram.comment",
+   "pk": 18,
+   "fields": {
+      "author": 9,
+      "post": 28,
+      "text": "Нормас",
+      "created": "2023-03-27T14:20:41.745Z",
+      "updated": "2023-03-27T14:20:41.745Z"
+   }
+},
+{
+   "model": "instagram.comment",
+   "pk": 19,
+   "fields": {
+      "author": 7,
+      "post": 28,
+      "text": "Да, тоже так думаю",
+      "created": "2023-03-27T14:22:32.024Z",
+      "updated": "2023-03-27T14:22:32.024Z"
+   }
+},
+{
+   "model": "instagram.comment",
+   "pk": 20,
+   "fields": {
+      "author": 7,
+      "post": 36,
+      "text": "Норм",
+      "created": "2023-03-28T10:02:37.615Z",
+      "updated": "2023-03-28T10:02:37.615Z"
+   }
+}
+]

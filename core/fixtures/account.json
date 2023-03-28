@@ -1,0 +1,116 @@
+[
+{
+   "model": "accounts.account",
+   "pk": 2,
+   "fields": {
+      "password": "pbkdf2_sha256$390000$v80STeiqojWKwceD57x6gJ$Kw8o/tMK4fZ8ihVp7+N78lxFbe1uuQZ3LA9qF2CQnsE=",
+      "last_login": "2023-03-28T10:08:05.730Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-03-23T05:27:32.468Z",
+      "email": "admin@gmail.com",
+      "avatar": "",
+      "birth_date": null,
+      "gender": "",
+      "phone": "-1339",
+      "info": "Info",
+      "groups": [],
+      "user_permissions": [],
+      "commented_post": [],
+      "laked_post": [],
+      "subscriptions": []
+   }
+},
+{
+   "model": "accounts.account",
+   "pk": 7,
+   "fields": {
+      "password": "pbkdf2_sha256$390000$JJjvGbPhJ8rhVduBFAL6pk$pRy5is1ZEQJdoxudpIzxhEFW4xuN7OEvoDUWOD7IXOU=",
+      "last_login": "2023-03-28T10:16:40.344Z",
+      "is_superuser": false,
+      "username": "john",
+      "first_name": "John",
+      "last_name": "Doe",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-03-26T06:48:51.342Z",
+      "email": "john@gmail.com",
+      "avatar": "user_pic/23_bTlFuh9.jpg",
+      "birth_date": null,
+      "gender": "Man",
+      "phone": "8-777-222-22-22",
+      "info": "Info",
+      "groups": [],
+      "user_permissions": [],
+      "commented_post": [
+         28,
+         36
+      ],
+      "laked_post": [],
+      "subscriptions": []
+   }
+},
+{
+   "model": "accounts.account",
+   "pk": 8,
+   "fields": {
+      "password": "pbkdf2_sha256$390000$GwWssZzBYj4Kln5aAYgr1T$z85s93u2DRciaPNPfqBGGUWpx+23WjbTVcQyBQbfVr4=",
+      "last_login": "2023-03-28T10:16:51.973Z",
+      "is_superuser": false,
+      "username": "lil_vi",
+      "first_name": "Lil",
+      "last_name": "Vi",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-03-26T06:51:07.312Z",
+      "email": "lil@gmail.com",
+      "avatar": "user_pic/i2gb4m7j7cb41.png",
+      "birth_date": null,
+      "gender": "Man",
+      "phone": "8-777-222-22-22",
+      "info": "Info",
+      "groups": [],
+      "user_permissions": [],
+      "commented_post": [],
+      "laked_post": [
+         28,
+         35
+      ],
+      "subscriptions": [
+         9
+      ]
+   }
+},
+{
+   "model": "accounts.account",
+   "pk": 9,
+   "fields": {
+      "password": "pbkdf2_sha256$390000$m9e0EHvnSTczTeFBBZk50J$6AUO9CO2jmRiUMrIwPbcY1ZfA62x3F1F3P2r/92kBQQ=",
+      "last_login": "2023-03-28T10:02:02.738Z",
+      "is_superuser": false,
+      "username": "sara",
+      "first_name": "Sara",
+      "last_name": "Sara",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-03-26T06:51:57.313Z",
+      "email": "sara@gmail.com",
+      "avatar": "user_pic/172241-art-gaz-krug-tehnologii-elektrik-3840x2160.jpg",
+      "birth_date": null,
+      "gender": "Woman",
+      "phone": "8-777-222-22-22",
+      "info": "Info",
+      "groups": [],
+      "user_permissions": [],
+      "commented_post": [
+         28
+      ],
+      "laked_post": [],
+      "subscriptions": []
+   }
+}
+]
