@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block title %}Home{% endblock %}
+{% block menu %}
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'add_post' %}">
+                <button type="submit" class="btn btn-light">Добавить пост</button>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'logout' %}">
+                <button type="submit" class="btn btn-light">Выйти</button>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'profile' request.user.pk %}" class="icons">
+                <i class="fa-sharp fa-solid fa-user"></i>
+            </a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'register' %}">
+                <button type="button" class="btn btn-light">Зарегестрироваться</button>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'login' %}">
+                <button type="submit" class="btn btn-light">Войти</button>
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container cont">
+        <form class="d-flex" role="search" method="get" style="margin-top: 7px">
+            <input name="search" class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+            <button class="btn btn-light" type="submit">Поиск</button>
+        </form>
+        <h6>Результаты поиска:</h6>
+        {% for user in query %}
+            <a class="nav-link" style="color: white" href="{% url 'profile' user.pk %}">{{ user }}</a>
+        {% empty %}
+        {% endfor %}<br>
+        {% for post in posts %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <a href="{% url 'profile' post.author.pk %}"><img src="{{ post.author.avatar.url }}" alt="..."
+                                                                      class="post-avatar"></a>
+                    <a class="nav-link post-author" href="{% url 'profile' post.author.pk %}">{{ post.author }}</a>
+                </div>
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+                {% endif %}
+                <div class="card-body">
+                    {% if user.is_authenticated %}
+                        <div class="icon">
+                            <a href="{% url 'likes' post.pk %}" class="icons1">
+                                <i class="fa-solid fa-heart"></i>
+                            </a>
+                            <a href="{% url 'detail_post' post.pk %}" class="icons2">
+                                <i class="fa-solid fa-comment"></i>
+                            </a>
+                        </div>
+                    {% else %}
+                        <p class="card-text" style="color: #1b1b1b">Не зарегестрированнные или не
+                            аутентифицированные
+                            пользователи не могут лакать
+                            и комментировать пост(ы)</p>
+                    {% endif %}
+                    <p class="card-text" style="color: #1b1b1b">"{{ post.user_likes.count }}" отметок нравится</p>
+                    <p class="card-text" style="color: #1b1b1b">"{{ post.user_comments.count }}"
+                        комментариев</p>
+                    <p class="card-text" style="color: #1b1b1b">{{ post.description }}</p>
+                    <form action="{% url 'commented' post.pk %}" method="post">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <button class="btn btn-success" type="submit">Опубликовать</button>
+                    </form>
+                </div>
+            </div>
+            {% empty %}
+            <h5>Публикаций пока нет.</h5>
+        {% endfor %}
+        {% include 'partial/pagination.html' %}
+    </div>
+{% endblock %}

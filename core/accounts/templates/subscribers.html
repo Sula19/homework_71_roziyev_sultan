@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Подпискчики{% endblock %}
+{% block content %}
+    <div class="container cont">
+        <h3>Подпискчики:</h3><br>
+        {% for user in user_sub.subscriptions_acc.all %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 style="color: black" class="card-title">{{ user }}</h5><br>
+                    <a href="{% url 'profile' user.pk %}" class="btn btn-warning">Подробнее</a>
+                </div>
+            </div><br>
+        {% empty %}
+            <h5>Нет подписчиков</h5>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Detail Post{% endblock %}
+{% block menu %}
+    {% if user.is_authenticated %}
+        {% if post.author == request.user %}
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'update_post' post.pk %}">
+                    <button type="button" class="btn btn-light">Редактировать</button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'delete_post' post.pk %}">
+                    <button type="button" class="btn btn-light">Удалить</button>
+                </a>
+            </li>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container cont">
+        <div class="card mb-3">
+            {% if post.image %}
+                <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+            {% endif %}
+            <div class="card-body">
+                <a class="nav-link" href="{% url 'profile' post.author.pk %}">Автор: {{ post.author }}</a></p>
+                Описание:
+                <p class="card-text" style="color: #1b1b1b">{{ post.description }}</p>
+                <p class="card-text" style="color: #1b1b1b">Время создания: {{ post.created }}</p>
+                <p class="card-text" style="color: #1b1b1b">Время редактирования: {{ post.updated }}</p>
+            </div>
+        </div>
+        <h4 style="color: white">Комметнарии:</h4>
+        <br>
+        {% for comment in post.comment_post.all %}
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <a class="nav-link" href="{% url 'profile' comment.author.pk %}">Имя: {{ comment.author.username }}</a>
+                            <p class="card-text" style="color: black">Комметнарий: {{ comment.text }}</p>
+                            {% if comment.author == request.user %}
+                                <div class="btn-group" role="group">
+                                    <a href="{% url 'update_comment' comment.pk %}">
+                                        <button class="btn btn-success">Редактировать</button>
+                                    </a>
+                                    <form action="{% url 'delete_comment' comment.pk %}" method="post">
+                                        {% csrf_token %}
+                                        <a href="{% url 'delete_comment' comment.pk %}" style="margin-left: 10px">
+                                            <button class="btn btn-danger">Удалить</button>
+                                        </a>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div><br>
+            {% empty %}
+            <h5>Нет комментариев</h5>
+        {% endfor %}
+        <br>
+    </div>
+{% endblock %}

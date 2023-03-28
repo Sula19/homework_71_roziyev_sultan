@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Редактировать Комментарий{% endblock %}
+{% block content %}
+    <div class="container cont">
+        <div class="row d-flex justify-content-center">
+            <div class="col-7 card text-bg-light form-margins">
+                <h2 style="color: #1b1b1b">Редактировать комментарий</h2>
+                <form method="post">
+                    {% include 'partial/create_or_update.html' with button='Редактировать' %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

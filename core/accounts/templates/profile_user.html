@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Пользователь{% endblock %}
+{% block content %}
+    <div class="container cont">
+        <div class="box">
+            <h3>{{ user_obj.username }}</h3>
+            <a class="nav-link nav-left" aria-current="page" href="{% url 'change' user_obj.pk %}">
+                <button type="button" class="btn btn-light">Редактировать</button>
+            </a>
+            <a class="nav-link nav-right" aria-current="page" href="{% url 'password_change' user_obj.pk %}">
+                <button type="button" class="btn btn-light">Смена пароля</button>
+            </a>
+        </div>
+        <br>
+        <div class="sub">
+            {% for post in user_obj.author_post.all %}
+                <a class="nav-link link" href="{% url 'detail_post' post.pk %}" style="color: white;">Публикаций: {{ user_obj.author_post.all.count }}</a>
+            {% endfor %}
+            <a class="nav-link" href="{% url 'subscriptions' user_obj.pk %}" style="color: white; margin-left: 20px">Подпсики: {{ user_obj.subscriptions.all.count }}</a>
+            <a class="nav-link link" href="{% url 'subscribers' user_obj.pk %}" style="color: white; margin-left: 20px">Подписчики: {{ user_obj.subscriptions_acc.all.count }}</a>
+        </div>
+        {% if user_obj.avatar %}
+            <img class="avatar" src="{{ user_obj.avatar.url }}" width="250" height="250" alt="user picture">
+        {% endif %}<br>
+        {% if user_obj != request.user %}
+            <div class="subs">
+                {% if not user_obj.subscriptions_acc.all %}
+                    <a href="{% url 'sub' user_obj.pk %}" class="btn btn-light">Подписаться</a>
+                {% else %}
+                    <a href="{% url 'sub' user_obj.pk %}" class="btn btn-light">Отписаться</a>
+                {% endif %}
+            </div>
+        {% endif %}<br>
+        <h2 class="text-center clear">Публикации:</h2><br>
+        {% include 'partial/post_list.html' %}
+    </div>
+{% endblock %}
