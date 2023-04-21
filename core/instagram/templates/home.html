@@ -54,9 +54,9 @@
                         <div class="icon">
                             <form action="{% url 'likes' post.pk %}" method="post">
                                 {% csrf_token %}
-                                <button class="add-like" data-post_id="{{ post.pk }}"><img src="{% static 'img/like.png' %}"
-                                                                                      alt="like" width="30" height="30"
-                                                                                      id="like"></button>
+                                <button class="add-like"><img src="{% static 'img/like.png' %}"
+                                                              alt="like" width="30" height="30"
+                                                              id="like"></button>
                             </form>
                             <a href="{% url 'detail_post' post.pk %}" class="icons2">
                                 <img src="{% static 'img/comment.png' %}" alt="comment" width="30" height="30">
