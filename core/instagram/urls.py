@@ -1,8 +1,8 @@
 from django.urls import path
 
 from instagram.views.views import (IndexView,
-                                   CreatePost,
                                    AddLike,
+                                   CreatePost,
                                    Subscribes,
                                    AddComment,
                                    UpdatePost,
