@@ -2,12 +2,8 @@
     font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
 }
 
-body {
-    background-color: #121212;
-}
-
 .navbar {
-    background-color: black;
+    background-color: whitesmoke;
 }
 
 .icons {
@@ -16,8 +12,13 @@ body {
     margin-right: 15px;
 }
 
+.fa-door-open {
+    font-size: 35px;
+}
+
 .subs {
     text-align: center;
+    margin-top: -50px;
 }
 
 .post-avatar {
@@ -38,17 +39,15 @@ body {
 
 .box {
     text-align: center;
-    display: block ruby;
-    margin-top: 12%;
+    display: inline-flex;
+    margin-left: 453px;
+    margin-top: 8%;
 }
 
 .sub {
     justify-content: center;
     display: flex;
-}
-
-h6, h2, h3, p, h5 {
-    color: white;
+    margin-top: 15px;
 }
 
 .icon {
@@ -62,8 +61,10 @@ h6, h2, h3, p, h5 {
     font-size: 23px;
 }
 
-.icons1 {
+.add-like {
     font-size: 23px;
+    background: transparent;
+    border: 0;
 }
 
 .avatar {
@@ -83,6 +84,10 @@ h6, h2, h3, p, h5 {
     margin-top: 30px;
 }
 
+.con {
+    margin-top: 30px;
+    max-width: 900px;
+}
 
 .pagination {
     text-align: center;
