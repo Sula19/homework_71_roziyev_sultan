@@ -33,3 +33,8 @@ class Post(models.Model):
 
     def __str__(self):
         return f'{self.author} - {self.description}'
+
+
+class Like(models.Model):
+    user = models.ForeignKey(to=get_user_model(), blank=False, null=False, related_name='user', on_delete=models.CASCADE)
+    post = models.ForeignKey(to=Post, on_delete=models.CASCADE, null=False, blank=False, related_name='post')

@@ -1,32 +1,23 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load django_bootstrap5 %}
 {% block title %}Home{% endblock %}
 {% block menu %}
     {% if user.is_authenticated %}
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'add_post' %}">
-                <button type="submit" class="btn btn-light">Добавить пост</button>
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'logout' %}">
-                <button type="submit" class="btn btn-light">Выйти</button>
+                <button type="submit" class="btn btn-dark">Выйти</button>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{% url 'profile' request.user.pk %}" class="icons">
-                <i class="fa-sharp fa-solid fa-user"></i>
-            </a>
-        </li>
-    {% else %}
-        <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'register' %}">
-                <button type="button" class="btn btn-light">Зарегестрироваться</button>
+            <a class="nav-link" aria-current="page" href="{% url 'add_post' %}">
+                <img src="{% static 'img/post.png' %}" alt="post" height="35" width="35">
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{% url 'login' %}">
-                <button type="submit" class="btn btn-light">Войти</button>
+            <a href="{% url 'profile' request.user.pk %}" class="nav-link"><img src="{{ request.user.avatar.url }}"
+                                                                                alt="..."
+                                                                                class="post-avatar">
             </a>
         </li>
     {% endif %}
@@ -35,40 +26,53 @@
     <div class="container cont">
         <form class="d-flex" role="search" method="get" style="margin-top: 7px">
             <input name="search" class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
-            <button class="btn btn-light" type="submit">Поиск</button>
+            <button class="btn btn-dark" type="submit">Поиск</button>
         </form>
         <h6>Результаты поиска:</h6>
         {% for user in query %}
-            <a class="nav-link" style="color: white" href="{% url 'profile' user.pk %}">{{ user }}</a>
+            <a class="nav-link" href="{% url 'profile' user.pk %}">{{ user }}</a>
         {% empty %}
         {% endfor %}<br>
+    </div>
+    <div class="container con">
         {% for post in posts %}
-            <div class="card mb-3">
+            <div class="card mb-4">
                 <div class="card-header">
-                    <a href="{% url 'profile' post.author.pk %}"><img src="{{ post.author.avatar.url }}" alt="..."
+                    <a href="{% url 'profile' post.author.pk %}"><img src="{{ post.author.avatar.url }}"
+                                                                      alt="..."
                                                                       class="post-avatar"></a>
-                    <a class="nav-link post-author" href="{% url 'profile' post.author.pk %}">{{ post.author }}</a>
+                    <a class="nav-link post-author"
+                       href="{% url 'profile' post.author.pk %}">{{ post.author }}</a>
                 </div>
                 {% if post.image %}
-                    <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+                    <img src="{{ post.image.url }}" class="card-img-top" alt="..." height="700">
+                {% else %}
+                    <img src="{% static 'img/no_image.png' %}" class="card-img-top" alt="no image" height="700">
                 {% endif %}
                 <div class="card-body">
                     {% if user.is_authenticated %}
                         <div class="icon">
-                            <a href="{% url 'likes' post.pk %}" class="icons1">
-                                <i class="fa-solid fa-heart"></i>
-                            </a>
+                            <form action="{% url 'likes' post.pk %}" method="post">
+                                {% csrf_token %}
+                                <button class="add-like" data-post_id="{{ post.pk }}"><img src="{% static 'img/like.png' %}"
+                                                                                      alt="like" width="30" height="30"
+                                                                                      id="like"></button>
+                            </form>
                             <a href="{% url 'detail_post' post.pk %}" class="icons2">
-                                <i class="fa-solid fa-comment"></i>
+                                <img src="{% static 'img/comment.png' %}" alt="comment" width="30" height="30">
+                            </a>
+                            <a href="#" class="icons2">
+                                <img src="{% static 'img/send.png' %}" alt="send" width="33" height="33">
                             </a>
                         </div>
                     {% else %}
                         <p class="card-text" style="color: #1b1b1b">Не зарегестрированнные или не
                             аутентифицированные
-                            пользователи не могут лакать
+                            пользователи не могут лаЙкать
                             и комментировать пост(ы)</p>
-                    {% endif %}
-                    <p class="card-text" style="color: #1b1b1b">"{{ post.user_likes.count }}" отметок нравится</p>
+                    {% endif %}<br>
+                    <p class="card-text" id="likes_count" style="color: #1b1b1b">"{{ post.user_likes.count }}" отметок
+                        нравится</p>
                     <p class="card-text" style="color: #1b1b1b">"{{ post.user_comments.count }}"
                         комментариев</p>
                     <p class="card-text" style="color: #1b1b1b">{{ post.description }}</p>
@@ -79,9 +83,8 @@
                     </form>
                 </div>
             </div>
-            {% empty %}
+        {% empty %}
             <h5>Публикаций пока нет.</h5>
         {% endfor %}
-        {% include 'partial/pagination.html' %}
     </div>
 {% endblock %}

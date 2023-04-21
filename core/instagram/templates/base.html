@@ -16,7 +16,10 @@
 <body>
 <nav class="navbar">
     <div class="container">
-        <a class="navbar-brand" href="/" style="color: white"><i class="fa-brands fa-instagram"></i> | Instagram</a>
+        <a class="navbar-brand" href="/" style="color: white"><img style="margin-top: -5px"
+                                                                   src="{% static 'img/logo_insta.png' %}" alt="logo"
+                                                                   width="25" height="25"> <img
+                src="{% static 'img/logo.png' %}" alt="logo" width="140" height="40"></a>
         <ul class="nav justify-content-end">
             {% block menu %}{% endblock %}
         </ul>

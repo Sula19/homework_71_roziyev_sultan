@@ -1,29 +1,16 @@
+{% load static %}
 {% if is_paginated %}
     {% include 'partial/pagination.html' %}
 {% endif %}
 {% for post in posts %}
-    <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col">
-            <div class="card">
-                <img src="{{ post.image.url }}" alt="...">
-                <div class="card-body">
-                    <h5 style="color: black">Автор: {{ post.author }}</h5><br>
-                    Описание:
-                    <p style="color: black">{{ post.description }}</p>
-                    {% if post.author == request.user %}
-                        <div class="btn-group" role="group">
-                            <a href="{% url 'update_post' post.pk %}">
-                                <button class="btn btn-success">Редактировать</button>
-                            </a>
-                            <form action="{% url 'delete_post' post.pk %}" method="post">
-                                {% csrf_token %}
-                                <a href="{% url 'delete_post' post.pk %}" style="margin-left: 10px">
-                                    <button class="btn btn-danger">Удалить</button>
-                                </a>
-                            </form>
-                        </div>
-                    {% endif %}
-                </div>
+            <div class="card h-100">
+                {% if post.image %}
+                    <a href="{% url 'detail_post' post.pk %}"><img src="{{ post.image.url }}" alt="..." height="250"></a>
+                {% else %}
+                    <a href="{% url 'detail_post' post.pk %}"><img src="{% static 'img/no_image.png' %}" alt="no image" height="250"></a>
+                {% endif %}
             </div>
         </div>
     </div>

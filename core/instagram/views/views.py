@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, get_object_or_404, reverse
 from django.views.generic import CreateView, ListView, View, UpdateView, DeleteView, DetailView
 from instagram.models import Comment
-from instagram.models.post import Post
+from instagram.models.post import Post, Like
 from django.db.models import Q
 from instagram.forms import PostForm, CommentForm
 from accounts.models import Account
@@ -13,11 +13,17 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 class IndexView(ListView):
     template_name = 'home.html'
     model = Post
-    paginate_by = 5
+    paginate_by = 3
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
-        context['posts'] = Post.objects.all()
+        user = self.request.user
+        context['posts'] = Post.objects.filter(Q(author__in=user.subscriptions.all())).order_by('-created')
         search = self.request.GET.get('search')
         if search:
             query = get_user_model().objects.filter(
@@ -83,15 +89,13 @@ class Subscribes(LoginRequiredMixin, View):
 
 
 class AddLike(LoginRequiredMixin, View):
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         post = get_object_or_404(Post, pk=kwargs.get('pk'))
         user = request.user
         if post not in user.laked_post.all():
-            messages.success(request, f'Пользователь {request.user} поставил лайк')
             user.laked_post.add(post)
         else:
-            messages.warning(request, 'Вы не можете лакайтаь пост больше одного раза')
-            pass
+            user.laked_post.remove(post)
         return redirect('/')
 
 

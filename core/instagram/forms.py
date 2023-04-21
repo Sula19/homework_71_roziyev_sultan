@@ -3,8 +3,6 @@ from instagram.models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
-    image = forms.ImageField(required=True, label='Картина')
-
     class Meta:
         model = Post
         fields = ('image', 'description')
@@ -15,7 +13,6 @@ class PostForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-
     class Meta:
         model = Comment
         fields = ('text',)
